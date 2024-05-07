@@ -37,6 +37,28 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'MH_EBOOK_VERSION', '1.0.0' );
 
+define('VITERJS_DEV_MOOD', true);
+ add_action( "wp_enqueue_scripts", function(){
+    if(defined('VITERJS_DEV_MOOD') && VITERJS_DEV_MOOD){
+        add_action( "wp_head", function(){
+            ?>
+            <script type="module">
+                import RefreshRuntime from "http://localhost:3000/@react-refresh"
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {}
+                window.$RefreshSig$ = () => (type) => type
+                window.vite_plugin_react_preamble_installed = true
+            </script>
+
+            <script type="module" crossorigin src="http://localhost:3000/src/main.jsx"></script>
+            <?php
+        } );
+    }else{
+        wp_enqueue_style( 'viterjs', plugin_dir_url(__FILE__).'dist/assets/main-m0DGwFy9.css', array(), '1.0.0', 'all' );
+        wp_enqueue_script( 'viterjs', plugin_dir_url(__FILE__).'dist/assets/main-7kmqk901.js', array('jquery'), '1.0.0', true );
+    }
+ } );
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-mh-ebook-activator.php

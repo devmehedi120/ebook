@@ -7,7 +7,7 @@
  * @since      1.0.0
  *
  * @package    Mh_Ebook
- * @subpackage Mh_Ebook/public
+ * @subpackage Mh_Ebook/client
  */
 
 /**
@@ -17,7 +17,7 @@
  * enqueue the public-facing stylesheet and JavaScript.
  *
  * @package    Mh_Ebook
- * @subpackage Mh_Ebook/public
+ * @subpackage Mh_Ebook/client
  * @author     Mehedi Hasan <wpdevmehedi@gmail.com>
  */
 class Mh_Ebook_Public {
@@ -51,6 +51,7 @@ class Mh_Ebook_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		add_shortcode( 'mhcpdf', [$this, 'mhcpdf_cb'] );
 
 	}
 
@@ -98,6 +99,17 @@ class Mh_Ebook_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mh-ebook-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	function mhcpdf_cb(){
+		ob_start();
+		?>
+		<div id="mhEbook">
+             
+		</div>
+
+		<?php
+		return ob_get_clean();
 	}
 
 }

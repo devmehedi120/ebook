@@ -9,7 +9,7 @@
  * @since      1.0.0
  *
  * @package    Mh_Ebook
- * @subpackage Mh_Ebook/public/partials
+ * @subpackage Mh_Ebook/client/partials
  */
 ?>
 
